@@ -17,6 +17,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pttkht.IListFastFood;
 import com.example.pttkht.adapter.AdapterFastFood;
 import com.example.pttkht.model.ManagerData;
 import com.example.pttkht.R;
@@ -29,7 +30,7 @@ import io.realm.Realm;
  * Created by Heart Of Dead on 11/1/2017.
  */
 
-public class FastFoodActivity extends AppCompatActivity {
+public class FastFoodActivity extends AppCompatActivity implements IListFastFood {
     private Toolbar mToolBar;
     private AdapterFastFood adapterGirdView;
 
@@ -57,28 +58,8 @@ public class FastFoodActivity extends AppCompatActivity {
     }
 
     private void initEvents() {
-        adapterGirdView = new AdapterFastFood(category.getIdCategory());
+        adapterGirdView = new AdapterFastFood(category.getIdCategory(),this);
         mGridView.setAdapter(adapterGirdView);
-
-
-
-
-  mGridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-      @Override
-      public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-          Log.d("=========", "onClick:++++++");
-          FastFood fastFood = ManagerData.getIntance().getFastFood(category.getIdCategory()).get(i);
-          int idFastFood = fastFood.getIdFastFood();
-          if(ManagerData.getIntance().saveOrderFood(mRealm,idFastFood,category.getIdCategory(),fastFood.getPrices(),1)){
-              Toast.makeText(FastFoodActivity.this, "Thêm vào giỏ hàng thành công", Toast.LENGTH_LONG).show();
-              txtNumberOfShoopingCart.setText(ManagerData.getIntance().getListOrderFood(mRealm).size() + "");
-          }else {
-              Toast.makeText(FastFoodActivity.this, "Đã có trong giỏ hàng", Toast.LENGTH_LONG).show();
-          }
-          return false;
-      }
-  });
-
 
     }
 
@@ -141,6 +122,18 @@ public class FastFoodActivity extends AppCompatActivity {
         super.onResume();
         if(check){
             txtNumberOfShoopingCart.setText(ManagerData.getIntance().getListOrderFood(mRealm).size() + "");
+        }
+    }
+
+    @Override
+    public void shoppingCart(int position) {
+        FastFood fastFood = ManagerData.getIntance().getFastFood(category.getIdCategory()).get(position);
+        int idFastFood = fastFood.getIdFastFood();
+        if(ManagerData.getIntance().saveOrderFood(mRealm,idFastFood,category.getIdCategory(),fastFood.getPrices(),1)){
+            Toast.makeText(FastFoodActivity.this, "Thêm vào giỏ hàng thành công", Toast.LENGTH_LONG).show();
+            txtNumberOfShoopingCart.setText(ManagerData.getIntance().getListOrderFood(mRealm).size() + "");
+        }else {
+            Toast.makeText(FastFoodActivity.this, "Đã có trong giỏ hàng", Toast.LENGTH_LONG).show();
         }
     }
 }

@@ -7,6 +7,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.pttkht.IList;
+import com.example.pttkht.IListFastFood;
 import com.example.pttkht.R;
 import com.example.pttkht.model.ManagerData;
 import com.example.pttkht.model.objects.FastFood;
@@ -18,9 +20,10 @@ import com.squareup.picasso.Picasso;
 
 public class AdapterFastFood extends BaseAdapter{
     private int idCategory;
-
-    public AdapterFastFood(int idCategory) {
+private IListFastFood iListFast;
+    public AdapterFastFood(int idCategory, IListFastFood iList) {
         this.idCategory = idCategory;
+        this.iListFast=iList;
     }
 
     @Override
@@ -64,6 +67,7 @@ public class AdapterFastFood extends BaseAdapter{
         myHolder.shoppingCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                iListFast.shoppingCart(position);
 
             }
         });
