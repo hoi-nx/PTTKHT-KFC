@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="3dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/header_"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="#D50000"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Phần Ăn Đã Chọn"
+            android:textColor="#FFEBEE"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/header_"
+            android:gravity="center"
+            android:lines="2"
+            android:text="Chúng tôi nhận đặt hàng trực tuyến từ 09:00 đến 21:00" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_below="@+id/note"
+            android:background="#D50000" />
+
+        <ListView
+            android:id="@+id/rc_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/rl_"
+            android:layout_below="@+id/view"></ListView>
+
+        <RelativeLayout
+            android:id="@+id/rl_"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/dathang_"
+            android:background="#D50000">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tổng: "
+                android:textColor="#FFEBEE"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/total_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="0 VND"
+                android:textColor="#FFEBEE"
+                android:textSize="30dp" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/dathang_"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="Đặt Hàng" />
+
+
+    </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>
